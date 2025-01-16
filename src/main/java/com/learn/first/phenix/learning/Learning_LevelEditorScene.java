@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.GL30.*;
 public class Learning_LevelEditorScene extends Scene {
     private Shader defaultShader;
 
-    private float[] vertexArr = {
+    private final float[] vertexArr = {
             // position             // color
             -0.5f,  0.5f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f, // Top left     0
             -0.5f, -0.5f, 0.0f,       0.0f, 1.0f, 0.0f, 1.0f, // Bottom left  1
@@ -21,7 +21,7 @@ public class Learning_LevelEditorScene extends Scene {
 
     };
     // IMPORTANT: Must be in counter-clockwise order
-    private int[] elementArr = {
+    private final int[] elementArr = {
             3, 2, 0, // Top right triangle
             3, 1, 0  // bottom left triangle
     };

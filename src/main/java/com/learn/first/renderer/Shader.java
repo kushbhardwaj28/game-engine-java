@@ -13,7 +13,7 @@ public class Shader {
     private int shaderProgramId;
     private String vertexSource;
     private String fragmentSource;
-    private String filePath;
+    private final String filePath;
 
     public Shader(String filePath){
         this.filePath = filePath;
