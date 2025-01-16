@@ -1,5 +1,6 @@
-package com.learn.first.phenix;
+package com.learn.first.phenix.learning;
 
+import com.learn.first.phenix.Scene;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -7,7 +8,7 @@ import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.GL30.*;
 
-public class LevelEditorScene extends Scene {
+public class Learning_LevelEditorScene extends Scene {
 
     private String vertexShaderSource = """
             #version 330 core
@@ -50,7 +51,7 @@ public class LevelEditorScene extends Scene {
             3, 1, 0  // bottom left triangle
     };
 
-    public LevelEditorScene() {
+    public Learning_LevelEditorScene() {
     }
 
     private int vaoId, vboId, eboId;
