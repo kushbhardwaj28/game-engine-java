@@ -8,7 +8,7 @@ public class MouseListener {
 
     private double scrollX, scrollY;
     private double xPos, yPos, lastX, lastY;
-    private boolean mouseButtonPressed[] = new boolean[7];
+    private final boolean[] mouseButtonPressed = new boolean[7];
     private boolean dragging;
 
     private MouseListener() {
@@ -28,11 +28,11 @@ public class MouseListener {
         return instance;
     }
 
-    public static void mousePosCallback(long window, double xpos, double ypos) {
+    public static void mousePosCallback(long window, double xPos, double yPos) {
         get().lastX = get().xPos;
         get().lastY = get().yPos;
-        get().xPos = xpos;
-        get().yPos = ypos;
+        get().xPos = xPos;
+        get().yPos = yPos;
         get().dragging = get().mouseButtonPressed[0]  || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
     }
 

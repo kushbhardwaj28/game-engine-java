@@ -5,7 +5,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
 public class KeyListener {
     private static KeyListener instance;
-    private boolean keyPressed[] = new boolean[350]; // at max 350 keys in a keyboard
+    private final boolean[] keyPressed = new boolean[350]; // at max 350 keys in a keyboard
 
     private KeyListener() {
 

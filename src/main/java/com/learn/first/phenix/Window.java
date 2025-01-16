@@ -128,14 +128,6 @@ public class Window {
                 currentScene.update(dt);
             }
 
-//            if(KeyListener.keyPressed(GLFW_KEY_SPACE)) {
-//                System.out.println("Space key is pressed");
-//            }
-//
-//            if(MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_1)) {
-//                System.out.println("Mouse button 1 pressed");
-//            }
-
             glfwSwapBuffers(glfwWindow);
 
             endTime = Time.getTime();
