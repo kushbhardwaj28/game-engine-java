@@ -1,6 +1,7 @@
 package com.learn.first.phenix.learning;
 
 import com.learn.first.phenix.Scene;
+import com.learn.first.renderer.Shader;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -9,33 +10,7 @@ import java.nio.IntBuffer;
 import static org.lwjgl.opengl.GL30.*;
 
 public class Learning_LevelEditorScene extends Scene {
-
-    private String vertexShaderSource = """
-            #version 330 core
-            layout (location=0) in vec3 aPos; // a stands for attribute
-            layout (location=1) in vec4 aColor;
-            
-            out vec4 fColor; // f stand for fragment
-            
-            void main() {
-                fColor = aColor;
-                gl_Position = vec4(aPos, 1.0);
-            }
-            """;
-
-    private String fragmentShaderSource = """
-            #version 330 core
-            
-            in vec4 fColor;
-            
-            out vec4 color;
-            
-            void main() {
-                color = fColor;
-            }
-            """;
-
-    private int vertexId, fragementId, shaderProgram;
+    private Shader defaultShader;
 
     private float[] vertexArr = {
             // position             // color
@@ -58,49 +33,8 @@ public class Learning_LevelEditorScene extends Scene {
 
     @Override
     public void init() {
-        // Compile and link shader
-        // load and compile the vertex shader
-        vertexId = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertexId, vertexShaderSource);
-        glCompileShader(vertexId);
-
-        // Check for errors in compilation
-        int success = glGetShaderi(vertexId, GL_COMPILE_STATUS);
-        if(success == GL_FALSE) {
-            int len = glGetShaderi(vertexId, GL_INFO_LOG_LENGTH);
-            System.out.println("Error: generating vertex shader");
-            System.out.println(glGetShaderInfoLog(vertexId, len));
-            assert false : "";
-        }
-
-        // load and compile the vertex shader
-        fragementId = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fragementId, fragmentShaderSource);
-        glCompileShader(fragementId);
-
-        // Check for errors in compilation
-        success = glGetShaderi(fragementId, GL_COMPILE_STATUS);
-        if(success == GL_FALSE) {
-            int len = glGetShaderi(fragementId, GL_INFO_LOG_LENGTH);
-            System.out.println("Error: generating fragment shader");
-            System.out.println(glGetShaderInfoLog(fragementId, len));
-            assert false : "";
-        }
-
-        // Link Shaders and check for errors
-        shaderProgram = glCreateProgram();
-        glAttachShader(shaderProgram, vertexId);
-        glAttachShader(shaderProgram, fragementId);
-        glLinkProgram(shaderProgram);
-
-        success = glGetProgrami(shaderProgram, GL_LINK_STATUS);
-        if(success == GL_FALSE) {
-            int len = glGetProgrami(shaderProgram, GL_INFO_LOG_LENGTH);
-            System.out.println("Error: linking shaders");
-            System.out.println(glGetProgramInfoLog(shaderProgram, len));
-            assert false : "";
-        }
-
+        defaultShader = new Shader("assets/shaders/default.glsl");
+        defaultShader.compile();
         // Generate VAO, VBO and EBO buffer objects and send to GPU
         vaoId = glGenVertexArrays();
         glBindVertexArray(vaoId);
@@ -140,7 +74,7 @@ public class Learning_LevelEditorScene extends Scene {
     public void update(float dt) {
         System.out.println((1.0f / dt) + " FPS");
         // Bind shader program
-        glUseProgram(shaderProgram);
+        defaultShader.use();
         // Bind the vao
         glBindVertexArray(vaoId);
 
@@ -155,6 +89,6 @@ public class Learning_LevelEditorScene extends Scene {
         glDisableVertexAttribArray(1);
 
         glBindVertexArray(0);
-        glUseProgram(0);
+        defaultShader.detach();
     }
 }
