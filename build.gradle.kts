@@ -7,7 +7,8 @@ version = "1.0-SNAPSHOT"
 
 val lwjglVersion = "3.3.6"
 val jomlVersion = "1.10.7"
-val lwjglNatives = "natives-linux" // change this to target your build system
+//val lwjglNatives = "natives-linux" // change this to target your build system
+val lwjglNatives = "natives-macos-arm64" // change this to target your build system
 //val lwjglNatives = Pair(
 //    System.getProperty("os.name")!!,
 //    System.getProperty("os.arch")!!
